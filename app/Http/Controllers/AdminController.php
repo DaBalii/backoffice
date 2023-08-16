@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\admin;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -33,6 +34,35 @@ class AdminController extends Controller
     }
 
 
+   /* public function connexion(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "email" => ["required", "email"],
+            "password" => ["required", "string", "min:8", "max:255"]
+        ]);
+
+        if($validator->fails()){
+            return new JsonResponse( $validator->errors(), 401);
+        }
+
+        $admins = admin::where('email', $request->email)->first();
+
+        if (!$admins || !Hash::check($request->password, $admins->password)) {
+            return new JsonResponse(["message" => "Invalid credentials"], 401);
+        }
+
+        $token = $admins->createToken("CLE_SECRETE")->plainTextToken;
+
+        return new JsonResponse(
+            $admins
+        , 200);
+
+        /*return new JsonResponse([
+            "admin" =>$admins,
+            "token" => $token
+        ], 200);
+    }*/
+
     public function connexion(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -53,10 +83,15 @@ class AdminController extends Controller
         $token = $admins->createToken("CLE_SECRETE")->plainTextToken;
 
         return new JsonResponse([
-            "admin" => $admins,
+            "id" => $admins->id,
+            "name" => $admins->name,
+            "prenom" => $admins->prenom,
+            "email" => $admins->email,
+            "tel" => $admins->tel,
             "token" => $token
         ], 200);
     }
+
 
 
     /**
@@ -111,7 +146,6 @@ class AdminController extends Controller
             'email' => $request->email,
             'tel' => $request->tel,
             'password' => $request->password,
-
         ];
 
         admin::find($id)->update($data);
@@ -123,6 +157,13 @@ class AdminController extends Controller
     {
         admin::find($id)->delete();
         return redirect()->route('admin');
+    }
+
+
+    public function getAdminCount()
+    {
+        $AdminCount = admin::count();
+        return $AdminCount;
     }
 
 

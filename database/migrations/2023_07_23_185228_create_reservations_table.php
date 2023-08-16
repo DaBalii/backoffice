@@ -20,8 +20,6 @@ return new class extends Migration
             $table->integer("num_tel")->nullable(false);
             $table->date("date_arr")->nullable(false);
             $table->integer("duration")->nullable(false);
-            $table->unsignedBigInteger("id_admin")->nullable(false);
-            $table->foreign("id_admin")->references("id")->on("admins")->onDelete("cascade");
             $table->timestamps();
         });
     }

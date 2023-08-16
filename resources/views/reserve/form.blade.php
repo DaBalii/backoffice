@@ -34,10 +34,6 @@
                             <label for="reservation_duration">duration</label>
                             <input type="text" class="form-control" id="duration" name="duration" value="{{ isset($reserve) ? $reserve->duration : '' }}">
                         </div>
-                        <div class="form-group">
-                            <label for="reservation_id_admin">id_admin</label>
-                            <input type="text" class="form-control" id="id_admin" name="id_admin" value="{{ isset($reserve) ? $reserve->id_admin : '' }}">
-                        </div>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Save</button>

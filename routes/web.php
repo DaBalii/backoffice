@@ -33,9 +33,32 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
-Route::middleware('auth')->group(function () {
+/*Route::middleware('auth')->group(function () {
     Route::get('dashboard', function () {
         return view('dashboard');
+    })->name('dashboard');*/
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('dashboard', function () {
+
+        $viewController = app( viewController::class);
+        $VisiterCount = $viewController->getVisiterCount();
+
+        $AdminController = app( AdminController::class);
+        $AdminCount = $AdminController->getAdminCount();
+
+        $homeController = app( homeController::class);
+        $HomeCount = $homeController->getHomeCount();
+
+         $categoryController = app(categoryController::class);
+         $categoryCount = $categoryController->getCategoryCount();
+
+        $ReservationController = app(ReservationController::class);
+        $ReserCount = $ReservationController->getReserCount();
+
+         return view('dashboard', ['categoryCount' => $categoryCount ,'HomeCount' => $HomeCount],
+             ['AdminCount' => $AdminCount,'ReserCount' => $ReserCount,'VisiterCount' => $VisiterCount]);
     })->name('dashboard');
 
     Route::controller(homeController::class)->prefix('home')->group(function () {
@@ -47,7 +70,11 @@ Route::middleware('auth')->group(function () {
         Route::get('delete/{id}', 'delete')->name('homes.delete');
     });
 
+
+
+
     Route::controller(categoryController::class)->prefix('category')->group(function () {
+
         Route::get('', 'index')->name('category');
         Route::get('add', 'add')->name('category.add');
         Route::post('save', 'save')->name('category.save');
@@ -55,6 +82,8 @@ Route::middleware('auth')->group(function () {
         Route::post('edit/{id}', 'update')->name('category.update');
         Route::get('delete/{id}', 'delete')->name('category.delete');
     });
+
+
 
     Route::controller(AdminController::class)->prefix('admin')->group(function (){
         Route::get('', 'index')->name('admin');
@@ -78,6 +107,7 @@ Route::middleware('auth')->group(function () {
         Route::get('edit/{id}', 'edit')->name('visits.edit');
         Route::post('edit/{id}', 'update')->name('visits.update');
         Route::get('delete/{id}', 'delete')->name('visits.delete');
+
     });
 
 });

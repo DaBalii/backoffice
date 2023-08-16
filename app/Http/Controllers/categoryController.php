@@ -21,15 +21,16 @@ class categoryController extends Controller
 
     public function save(Request $request)
     {
+        $request->validate([
+            'name' => 'required|unique:categories',
+        ]);
         category::create(['name' => $request->name]);
-
-        return redirect()->route('category');
+        return redirect()->route('category')->with('success', 'Catégorie créée avec succès.');
     }
 
     public function edit($id)
     {
         $category = category::find($id);
-        //echo "$category";
         return view('category.form', ['category' => $category]);
     }
 
@@ -45,4 +46,11 @@ class categoryController extends Controller
         category::destroy($id);
         return redirect()->route('category');
     }
+
+    public function getCategoryCount()
+    {
+        $categoryCount = category::count();
+        return $categoryCount;
+    }
+
 }
