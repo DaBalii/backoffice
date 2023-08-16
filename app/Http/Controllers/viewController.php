@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\admin;
 use App\Models\reservation;
 use App\Models\visiter;
 use Illuminate\Http\Request;
@@ -133,5 +134,12 @@ class viewController extends Controller
         visiter::find($id)->delete();
         return redirect()->route('visits');
     }
+
+    public function getVisiterCount()
+    {
+        $VisiterCount = visiter::count();
+        return $VisiterCount;
+    }
+
 
 }

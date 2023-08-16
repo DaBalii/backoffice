@@ -10,6 +10,6 @@ class reservation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'address', 'num_tel', 'date_arr', 'duration', 'id_admin'
+        'name', 'address', 'num_tel', 'date_arr', 'duration'
     ];
 }

@@ -17,7 +17,7 @@ class AuthController extends Controller
         return view('auth/register');
     }
 
-    public function registerSave(Request $request)
+    /*public function registerSave(Request $request)
     {
         Validator::make($request->all(), [
             'name' => 'required',
@@ -33,7 +33,30 @@ class AuthController extends Controller
         ]);
 
         return redirect()->route('login');
+    }*/
+
+    public function registerSave(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'level' => 'Admin'
+        ]);
+
+        return redirect()->route('login')->with('success', 'Utilisateur enregistré avec succès.');
     }
+
 
     public function login()
     {

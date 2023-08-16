@@ -14,7 +14,7 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name Category</th>
+                        <th>Nom Categorie</th>
                         <th>Action</th>
                     </tr>
                     </thead>

@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             @if (auth()->user()->level == 'Admin')
-                <a href="{{ route('homes.add') }}" class="btn btn-primary mb-3">Add home</a>
+                <a href="{{ route('homes.add') }}" class="btn btn-primary mb-3">Publié une maison</a>
             @endif
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -19,12 +19,14 @@
                         <th>code </th>
                         <th>localisation </th>
                         <th>description </th>
-                        <th>bathrooms </th>
-                        <th>area </th>
+                        <th>Salles de bains </th>
+                        <th>Surface </th>
                         <th>model </th>
-                        <th>path </th>
-                        <th>Category</th>
-                        <th>Price</th>
+                        <th>Chemin de l'image </th>
+                        <th>Catégorie</th>
+                        <th>Quartier</th>
+                        <th>Prix</th>
+                        <th>Position</th>
                         @if (auth()->user()->level == 'Admin')
                             <th>Action</th>
                         @endif
@@ -43,7 +45,9 @@
                             <td>{{ $row->model }}</td>
                             <td>{{ $row->path }}</td>
                             <td>{{ $row->category }}</td>
+                            <td>{{ $row->quartier }}</td>
                             <td>{{ $row->price }}</td>
+                            <td>{{ $row->position }}</td>
                             @if (auth()->user()->level == 'Admin')
                                 <td>
                                     <a href="{{ route('homes.edit', $row->id) }}" class="btn btn-warning">Edit</a>

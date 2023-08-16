@@ -18,7 +18,7 @@
                         <th>num_tel </th>
                         <th>date_arr </th>
                         <th>duration </th>
-                        <th>id_admin </th>
+
                         @if (auth()->user()->level == 'Admin')
                             <th>Action</th>
                         @endif
@@ -34,7 +34,6 @@
                             <td>{{ $row->num_tel }}</td>
                             <td>{{ $row->date_arr }}</td>
                             <td>{{ $row->duration }}</td>
-                            <td>{{ $row->id_admin }}</td>
                             @if (auth()->user()->level == 'Admin')
                                 <td>
                                     <a href="{{ route('reserve.edit', $row->id) }}" class="btn btn-warning">Edit</a>

@@ -10,7 +10,8 @@ class homes extends Model
     use HasFactory;
 
     protected $table ='homes';
-    protected $fillable =['item_code','price','localisation','description','bathrooms','area','model','path','category'];
-
+    protected $fillable =['item_code','price','localisation',
+        'description','bathrooms','area','model',
+        'path','category','quartier','position'];
 
 }

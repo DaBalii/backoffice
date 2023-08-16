@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('model')->nullable();
             $table->string('category')->nullable();
             $table->string('path')->nullable(false);
+            $table->string('quartier')->nullable();
+            $table->string('position')->nullable();
             $table->timestamps();
         });
     }

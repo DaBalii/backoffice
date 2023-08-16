@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 
+use App\Models\homes;
 use App\Models\reservation;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -34,11 +35,11 @@ class ReservationController extends Controller
     {
         $resetValidation = $request->validate([
             "name" => ["required", "string"],
-            "address" => ["required", "string"],
+            "address" => ["required", "email"],
             "num_tel" => ["required", "integer"],
             "date_arr" => ["required", "date_format:Y-m-d"],
             "duration" => ["required", "integer"],
-            "id_admin" => ["required", "numeric"],
+
         ]);
 
         $reservations = reservation::create([
@@ -47,10 +48,10 @@ class ReservationController extends Controller
             "num_tel" => $resetValidation["num_tel"],
             "date_arr" => $resetValidation["date_arr"],
             "duration" => $resetValidation["duration"],
-            "id_admin" => $resetValidation["id_admin"],
+
         ]);
 
-        return response(["message" => "Réservation effectuée avec succès"], 200);
+        return response($reservations , 200);
     }
     /**
      * Remove the specified resource from storage.
@@ -105,8 +106,6 @@ class ReservationController extends Controller
             'num_tel' => $request->num_tel,
             'date_arr' => $request->date_arr,
             'duration' => $request->duration,
-            'id_admin' => $request->id_admin,
-
         ];
 
 
@@ -126,7 +125,6 @@ class ReservationController extends Controller
             'num_tel' => $request->num_tel,
             'date_arr' => $request->date_arr,
             'duration' => $request->duration,
-            'id_admin' => $request->id_admin,
 
         ];
 
@@ -139,6 +137,12 @@ class ReservationController extends Controller
     {
         reservation::find($id)->delete();
         return redirect()->route('reserve');
+    }
+
+    public function getReserCount()
+    {
+        $ReserCount = reservation::count();
+        return $ReserCount;
     }
 
 

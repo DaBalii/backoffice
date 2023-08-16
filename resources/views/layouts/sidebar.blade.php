@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon rotate-n-12">
             <i class="fas fa-home"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">GAS Admin <sup></sup></div>
+        <div class="sidebar-brand-text mx-3">ATAKORA Admin <sup></sup></div>
     </a>
 
 
@@ -40,14 +40,14 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('visits') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Gestion des Visits</span></a>
+            <span>Gestion des Visites</span></a>
     </li>
 
     @if (auth()->user()->level == 'Admin')
         <li class="nav-item">
             <a class="nav-link" href="/category">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Category</span></a>
+                <span>Categories</span></a>
         </li>
     @endif
 
